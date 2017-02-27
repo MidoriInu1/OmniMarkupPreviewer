@@ -17,7 +17,6 @@ Dependencies:
 * [Pygments](http://pygments.org/)
 
 """
-
 from __future__ import absolute_import
 from __future__ import unicode_literals
 from . import Extension
@@ -100,7 +99,6 @@ class CodeHilite(object):
         """
 
         self.src = self.src.strip('\n')
-
         if self.lang is None:
             self._parseHeader()
 
@@ -115,8 +113,9 @@ class CodeHilite(object):
                         lexer = TextLexer()
                 except ValueError:
                     lexer = TextLexer()
+            css_language='lang-%s' % self.lang
             formatter = HtmlFormatter(linenos=self.linenums,
-                                      cssclass=self.css_class,
+                                      cssclass=self.css_class+' '+css_language,
                                       style=self.style,
                                       noclasses=self.noclasses,
                                       hl_lines=self.hl_lines)
@@ -190,7 +189,6 @@ class CodeHilite(object):
         else:
             # No match
             lines.insert(0, fl)
-
         self.src = "\n".join(lines).strip("\n")
 
 
